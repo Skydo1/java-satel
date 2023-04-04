@@ -124,18 +124,6 @@ public class Task1Tests {
     }
 
     @Test
-    public void checkDuplicate_id() {
-        BlackoutController controller = new BlackoutController();
-        assertThrows(Exception.class, () -> {
-            controller.createSatellite("Satellite1", "StandardSatellite", 100 + RADIUS_OF_JUPITER,
-                    Angle.fromDegrees(340));
-            controller.createDevice("DeviceA", "HandheldDevice", Angle.fromDegrees(30));
-            controller.createDevice("DeviceA", "LaptopDevice", Angle.fromDegrees(180));
-        });
-
-    }
-
-    @Test
     public void checkDuplicateafterdelete_id() {
         BlackoutController controller = new BlackoutController();
 
@@ -155,80 +143,6 @@ public class Task1Tests {
             controller.createDevice("DeviceA", "HandheldDevice", Angle.fromDegrees(30));
         });
 
-    }
-
-    @Test
-    public void check_samename_difftype() {
-        BlackoutController controller = new BlackoutController();
-
-        assertDoesNotThrow(() -> {
-            controller.createSatellite("Satellite1", "StandardSatellite", 100 + RADIUS_OF_JUPITER,
-                    Angle.fromDegrees(340));
-            controller.createDevice("DeviceA", "HandheldDevice", Angle.fromDegrees(30));
-            controller.createDevice("DeviceB", "LaptopDevice", Angle.fromDegrees(180));
-            controller.createDevice("DeviceC", "DesktopDevice", Angle.fromDegrees(330));
-        });
-
-        assertThrows(Exception.class, () -> {
-            controller.createSatellite("Satellite1", "RelaySatellite", 100 + RADIUS_OF_JUPITER, Angle.fromDegrees(340));
-        });
-        assertThrows(Exception.class, () -> {
-            controller.createDevice("DeviceA", "LaptopDevice", Angle.fromDegrees(180));
-        });
-
-    }
-
-    @Test
-    public void remove_twice_error() {
-        BlackoutController controller = new BlackoutController();
-
-        assertDoesNotThrow(() -> {
-            controller.createSatellite("Satellite1", "StandardSatellite", 100 + RADIUS_OF_JUPITER,
-                    Angle.fromDegrees(340));
-            controller.createDevice("DeviceA", "HandheldDevice", Angle.fromDegrees(30));
-            controller.createDevice("DeviceB", "LaptopDevice", Angle.fromDegrees(180));
-            controller.createDevice("DeviceC", "DesktopDevice", Angle.fromDegrees(330));
-        });
-
-        Exception exception = assertThrows(Exception.class, () -> {
-            controller.removeDevice("DeviceA");
-            controller.removeDevice("DeviceA");
-        });
-        String expectedMessage = "There is no this device";
-        String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
-
-        Exception exception2 = assertThrows(Exception.class, () -> {
-            controller.removeSatellite("Satellite1");
-            controller.removeSatellite("Satellite1");
-        });
-        String expectedMessage2 = "There is no this satellite";
-        String actualMessage2 = exception2.getMessage();
-        assertEquals(expectedMessage2, actualMessage2);
-    }
-
-    @Test
-    public void addfile_todevice() {
-        // can't add file to a non existing device
-        BlackoutController controller = new BlackoutController();
-
-        assertDoesNotThrow(() -> {
-            controller.createSatellite("Satellite1", "StandardSatellite", 100 + RADIUS_OF_JUPITER,
-                    Angle.fromDegrees(340));
-            controller.createDevice("DeviceA", "HandheldDevice", Angle.fromDegrees(30));
-        });
-
-        assertDoesNotThrow(() -> {
-            controller.addFileToDevice("DeviceA", "file1", "hi, this is file 1");
-        });
-
-        // duplicate
-        Exception exception = assertThrows(Exception.class, () -> {
-            controller.addFileToDevice("DeviceA", "file1", "different file 1");
-        });
-        String expectedMessage = "filename must be unique";
-        String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test

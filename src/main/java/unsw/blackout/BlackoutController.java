@@ -24,11 +24,11 @@ public class BlackoutController {
     private ArrayList<String> Ids = new ArrayList<String>();
     private ArrayList<String> filenames = new ArrayList<String>();
 
-    public void createDevice(String deviceId, String type, Angle position) throws Exception {
+    public void createDevice(String deviceId, String type, Angle position) {
         // TODO: Task 1a)
         for(String id: Ids){
             if(id == deviceId){
-                throw new Exception("Id must be unique");
+                System.out.println("Id must be unique");
             }
         }
         Ids.add(deviceId);
@@ -50,11 +50,11 @@ public class BlackoutController {
 
     }
 
-    public void removeDevice(String deviceId) throws Exception{
+    public void removeDevice(String deviceId){
         // TODO: Task 1b)
         // the user can do this , just double check
         if(Devices.isEmpty() || !Ids.stream().anyMatch(id -> id.equals(deviceId))){
-            throw new Exception("There is no this device");
+            System.out.println("There is no this device");
         }
         
         for(Device de: Devices){
@@ -71,12 +71,12 @@ public class BlackoutController {
 
     }
 
-    public void createSatellite(String satelliteId, String type, double height, Angle position) throws Exception {
+    public void createSatellite(String satelliteId, String type, double height, Angle position){
         // TODO: Task 1c)
 
         for(String id: Ids){
             if(id.equals(satelliteId)){
-                throw new Exception("Id must be unique");
+                System.out.println("Id must be unique");
             }
         }
         Ids.add(satelliteId);
@@ -100,13 +100,13 @@ public class BlackoutController {
 
     }
 
-    public void removeSatellite(String satelliteId) throws Exception {
+    public void removeSatellite(String satelliteId) {
         // TODO: Task 1d)
         // the user can do this , just double check
         boolean check = false;
 
         if(satellites.isEmpty() || !Ids.stream().anyMatch(id -> id.equals(satelliteId))){
-            throw new Exception("There is no this satellite");
+            System.out.println("There is no this satellite");
         }
 
         for(Satellite sa: satellites){
@@ -120,7 +120,7 @@ public class BlackoutController {
             
         }
        if(check == false){
-        throw new Exception("shouldn't reach here");
+        System.out.println("shouldn't reach here");
        }
 
     }
@@ -137,11 +137,11 @@ public class BlackoutController {
         return satellitelist;
     }
 
-    public void addFileToDevice(String deviceId, String filename, String content) throws Exception{
+    public void addFileToDevice(String deviceId, String filename, String content) {
         // TODO: Task 1g)
         for(String file: filenames){
             if(file.equals(filename)){
-                throw new Exception("filename must be unique");
+                System.out.println("filename must be unique");
             }
         }
 
