@@ -26,14 +26,14 @@ public class Task2Tests {
     @Test
     public void testpostion_change_aftersimulate() {
         BlackoutController controller = new BlackoutController();
-        assertDoesNotThrow(() -> {
+        
             controller.createSatellite("Satellite1", "StandardSatellite", 1000 + RADIUS_OF_JUPITER,
                     Angle.fromDegrees(320));
             controller.createSatellite("Satellite2", "TeleportingSatellite", 1000 + RADIUS_OF_JUPITER,
                     Angle.fromDegrees(177));
             controller.createSatellite("Satellite3", "RelaySatellite", 1000 + RADIUS_OF_JUPITER,
                     Angle.fromDegrees(310));
-        });
+
         controller.simulate();
         assertEquals(
                 "EntityInfoResponse [files={}, height=70911.0, id=Satellite1, positionRadians=5.549798145310935, positionDegrees=317.9800108758485, type=StandardSatellite]",

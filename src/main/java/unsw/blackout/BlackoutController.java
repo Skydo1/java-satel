@@ -301,7 +301,7 @@ public class BlackoutController {
 
     }
 
-    public void createDevice(String deviceId, String type, Angle position, boolean isMoving) throws Exception{
+    public void createDevice(String deviceId, String type, Angle position, boolean isMoving){
         createDevice(deviceId, type, position);
         // TODO: Task 3
     }
